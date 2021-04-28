@@ -48,17 +48,18 @@ class Login():
 
             #获取与填写验证码
             driver.get_screenshot_as_file(u'imgs/screenshot.png')
-            elem = driver.find_element_by_xpath('/html/body/div/div[2]/div/div[1]/form/div/div[2]/div[4]/img')
+            elem = driver.find_element_by_xpath('//*[@id="captchaAccount"]')
+            #('/html/body/div/div[2]/div/div[1]/form/div/div[2]/div[4]/img')
             self.cut_code(elem)
             
             image = r"./imgs/screenshot.png"
             tw = self.ocr_code(image)
             sleep(1)
 
-            driver.find_element_by_id('code').send_keys(tw)
+            driver.find_element_by_id('captcha').send_keys(tw)
             sleep(1)
 
-            driver.find_element_by_id('code').send_keys(Keys.ENTER)
+            driver.find_element_by_id('captcha').send_keys(Keys.ENTER)
             sleep(1)
             
             #判定是否登录成功
@@ -83,17 +84,19 @@ class Login():
         driver.find_element_by_id("ext-gen25").click()
         sleep(1)
 
-        driver.find_element_by_id("ext-gen28").click()
+        driver.find_element_by_id("ext-gen27").click()
         sleep(1)
 
         driver.quit()
 
 
 if __name__ == "__main__":
-    
-    usern = ''  #学号
-    passw = ''  #密码
-    url = 'http://my.sdwz.cn/login'
+
+    #需要填写的信息
+    usern = ''
+    passw = ''
+    url = 'http://sso.sdwz.cn/cas/login?service=http%3A%2F%2Fmy.sdwz.cn%2Flogin'
+    #'http://my.sdwz.cn/login'
     webdri_path = 'G:/Python/msedgedriver.exe'
 
     run = Login(usern,
