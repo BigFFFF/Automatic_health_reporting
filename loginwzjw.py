@@ -39,6 +39,7 @@ class Login():
         
         driver = webdriver.Edge(webdri_path)
         driver.get(url)
+        driver.maximize_window()
         sleep(1)
 
         while True:    
@@ -49,7 +50,6 @@ class Login():
             #获取与填写验证码
             driver.get_screenshot_as_file(u'imgs/screenshot.png')
             elem = driver.find_element_by_xpath('//*[@id="captchaAccount"]')
-            #('/html/body/div/div[2]/div/div[1]/form/div/div[2]/div[4]/img')
             self.cut_code(elem)
             
             image = r"./imgs/screenshot.png"
@@ -80,6 +80,10 @@ class Login():
         for handle in handles:
             if handle!=now_handle:
                 driver.switch_to.window(handle)
+                
+
+        driver.find_element_by_xpath("//*[@id=\"SKMYS2_ct\"]/label[1]/nobr/input").click()
+        sleep(1)
 
         driver.find_element_by_id("ext-gen25").click()
         sleep(1)
@@ -96,7 +100,6 @@ if __name__ == "__main__":
     usern = ''
     passw = ''
     url = 'http://sso.sdwz.cn/cas/login?service=http%3A%2F%2Fmy.sdwz.cn%2Flogin'
-    #'http://my.sdwz.cn/login'
     webdri_path = 'G:/Python/msedgedriver.exe'
 
     run = Login(usern,
