@@ -38,11 +38,8 @@ class Login():
             driver.find_element(By.ID, 'password').send_keys(passw)
 
             #获取与填写验证码
-            driver.get_screenshot_as_file(u'imgs/screenshot.png')
             elem = driver.find_element(By.ID, 'captchaAccount')
-
             tw = self.ocr_code(elem)
-
             driver.find_element(By.ID, 'captcha').send_keys(tw + Keys.ENTER)
             
             #判定是否登录成功
